@@ -6,7 +6,7 @@ for (let i = 1; i <= 100; i++) {
   arr.push(i);
 }
 
-console.log("guessedBySystemOneNumber", guessedBySystemOneNumber);
+console.log("Guessed a number by system:", guessedBySystemOneNumber);
 
 const low = 0;
 const high = arr.length - 1;
@@ -15,27 +15,27 @@ const mid = Math.round((high - low) / 2);
 let currentGuess = arr[mid - 1];
 let countOfIteration = 0;
 
-function guessNumber(crntGuess) {
+function binarySearch(guessNumber) {
   currentGuess = Math.round(currentGuess / 2); // 25 // 13 // 7 // 4 // 2 // 1
-  if (guessedBySystemOneNumber < crntGuess) {
+  if (guessedBySystemOneNumber < guessNumber) {
     countOfIteration += 1;
-    console.log("currentGuess ", crntGuess);
+    console.log("currentGuess ", guessNumber);
     console.log("Less");
 
-    return guessNumber(
-      currentGuess === 50 ? currentGuess : crntGuess - currentGuess
+    return binarySearch(
+      currentGuess === 50 ? currentGuess : guessNumber - currentGuess
     );
-  } else if (guessedBySystemOneNumber > crntGuess) {
+  } else if (guessedBySystemOneNumber > guessNumber) {
     countOfIteration += 1;
-    console.log("currentGuess ", crntGuess);
+    console.log("currentGuess ", guessNumber);
     console.log("More");
 
-    return guessNumber(crntGuess + currentGuess);
-  } else if (crntGuess === guessedBySystemOneNumber) {
-    console.log("currentGuess ", crntGuess);
+    return binarySearch(guessNumber + currentGuess);
+  } else if (guessNumber === guessedBySystemOneNumber) {
+    console.log("currentGuess ", guessNumber);
     console.log("You won!");
   }
 }
 
-guessNumber(currentGuess);
-console.log("Count of iteration: ", countOfIteration);
+binarySearch(currentGuess);
+console.log("Count of iteration:", countOfIteration);
